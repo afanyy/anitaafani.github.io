@@ -12,7 +12,6 @@
       min-height: 100vh;
       background: linear-gradient(180deg, #F4E2D1, #E9D5B7);
       color: #2f2a2a;
-      overflow-x: hidden;
       transition: background 0.5s ease, color 0.5s ease;
     }
 
@@ -21,313 +20,283 @@
       color: #f3eaff;
     }
 
-    #sunsetParticles {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-    }
-
-    .navbar {
-      width: 100%;
-      padding: 18px 40px;
+    /* NAVBAR */
+    nav.navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 16px 40px;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,0.6);
       position: sticky;
       top: 0;
-      backdrop-filter: blur(14px);
-      background: rgba(255,255,255,0.5);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      z-index: 1000;
+      z-index: 10;
     }
 
-    body.dark .navbar { background: rgba(40, 20, 70, 0.6); }
+    body.dark .navbar { background: rgba(40,20,70,0.7); }
 
-    .logo { font-weight: 600; font-size: 20px; }
+    .logo { font-size: 22px; font-weight: 700; }
 
-    .nav-links a {
-      margin-left: 20px;
+    ul.menu { display: flex; list-style: none; gap: 20px; align-items: center; }
+
+    ul.menu li a {
       text-decoration: none;
       color: inherit;
       font-weight: 500;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      bottom: -4px;
-      left: 0;
-      background: currentColor;
+      padding: 8px 14px;
+      border-radius: 10px;
       transition: 0.3s;
     }
 
-    .nav-links a:hover::after { width: 100%; }
+    ul.menu li a:hover { background: rgba(0,0,0,0.08); }
 
+    /* TOGGLE BUTTON */
     .toggle {
-      margin-left: 20px;
-      cursor: pointer;
       border: none;
-      padding: 8px 14px;
-      border-radius: 12px;
-      background: #2f2a2a;
+      padding: 10px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      background: linear-gradient(135deg, #ffb6f9, #a18bff);
       color: white;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      transition: 0.3s;
     }
 
-    body.dark .toggle { background: #ffffff22; }
+    .toggle:hover { transform: scale(1.05); }
 
-    .container { display: flex; justify-content: center; padding: 50px 20px; }
+    /* LAYOUT */
+    main.container { display: flex; justify-content: center; padding: 60px 20px; }
 
-    .card {
+    section.card {
+      max-width: 1100px;
       width: 100%;
-      max-width: 1000px;
-      backdrop-filter: blur(18px);
-      background: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(20px);
       border-radius: 28px;
-      padding: 40px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
-      animation: fadeUp 0.9s ease;
+      padding: 50px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
     }
 
     body.dark .card { background: rgba(255,255,255,0.08); }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* PROFILE GRID */
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 40px;
+      align-items: start;
     }
 
-    .header { display: flex; align-items: center; gap: 24px; margin-bottom: 24px; }
+    /* LEFT SIDE */
+    .left-profile {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
 
-    .profile {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
+    .identity-text h1 { font-size: 28px; }
+    .identity-text p { opacity: 0.9; }
+
+    .profile-photo {
+      width: 100%;
+      height: 420px;
+      border-radius: 24px;
       overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
       cursor: pointer;
-      position: relative;
-      border: 4px solid rgba(255,255,255,0.9);
+      transition: 0.3s;
     }
 
-    .profile::after {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.9), transparent);
-      transform: rotate(25deg);
-      opacity: 0;
+    .profile-photo:hover { transform: scale(1.03); }
+
+    .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* RIGHT SIDE */
+    .biodata-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 10px;
     }
 
-    .profile:hover::after { opacity: 1; animation: shine 1.2s linear; }
+    table { width: 100%; border-spacing: 0 12px; margin-top: 10px; }
 
-    @keyframes shine {
-      from { transform: translateX(-120%) rotate(25deg); }
-      to { transform: translateX(120%) rotate(25deg); }
-    }
+    th, td { padding: 14px 18px; }
 
-    .profile img { width: 100%; height: 100%; object-fit: cover; }
-
-    .name { font-size: 26px; font-weight: 600; }
-
-    table { width: 100%; border-collapse: separate; border-spacing: 0 10px; margin-top: 10px; }
-
-    th, td { padding: 14px 18px; font-size: 14px; }
-
-    th { width: 35%; background: rgba(255,255,255,0.7); border-radius: 12px 0 0 12px; }
-    td { background: rgba(255,255,255,0.9); border-radius: 0 12px 12px 0; }
+    th { width: 40%; background: rgba(255,255,255,0.85); border-radius: 12px 0 0 12px; }
+    td { background: rgba(255,255,255,0.95); border-radius: 0 12px 12px 0; }
 
     body.dark th { background: rgba(255,255,255,0.12); }
     body.dark td { background: rgba(255,255,255,0.06); }
 
-    .section-title { margin-top: 28px; font-size: 20px; font-weight: 600; }
+    .section-title { font-size: 22px; margin-top: 30px; font-weight: 700; }
 
-    .funfact-box {
-      margin-top: 14px;
-      padding: 18px 20px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.6);
-      cursor: pointer;
-      transition: 0.3s;
-    }
+    .funfact { margin-top: 16px; padding: 18px; border-radius: 16px; background: rgba(255,255,255,0.6); cursor: pointer; }
 
-    body.dark .funfact-box { background: rgba(255,255,255,0.08); }
+    .songs { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
 
-    .funfact-box:hover { transform: translateY(-3px); }
-
-    .hidden { display: none; margin-top: 10px; font-size: 14px; line-height: 1.6; }
-
-    .song-card {
-      margin-top: 10px;
-      padding: 14px 16px;
+    .song-btn {
+      padding: 12px 18px;
       border-radius: 14px;
       background: #2f2a2a;
       color: white;
       cursor: pointer;
+      border: none;
       transition: 0.3s;
     }
 
-    .song-card:hover { transform: scale(1.03); }
+    .song-btn:hover { transform: scale(1.05); }
 
-    .modal {
+    .hidden { display: none; margin-top: 10px; }
+
+    footer { text-align: center; padding: 24px; font-size: 13px; opacity: 0.7; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .profile-layout { grid-template-columns: 1fr; }
+      .profile-photo { height: 360px; }
+      nav.navbar { padding: 14px 20px; }
+    }
+  
+
+    /* Geser biodata sedikit ke bawah */
+    .biodata-right { margin-top: 40px; }
+
+    /* Animasi bintang saat dark mode */
+    body.dark::before {
+      content: "";
       position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(2px 2px at 70% 80%, white, transparent),
+        radial-gradient(1.5px 1.5px at 40% 60%, white, transparent),
+        radial-gradient(1.5px 1.5px at 90% 20%, white, transparent);
+      background-repeat: repeat;
+      animation: starsMove 60s linear infinite;
+      opacity: 0.6;
       pointer-events: none;
-      transition: 0.3s;
-      z-index: 999;
+      z-index: 0;
     }
 
-    .modal img {
-      width: 320px;
-      border-radius: 20px;
-      transform: scale(0.8);
-      transition: 0.3s;
+    @keyframes starsMove {
+      from { transform: translateY(0); }
+      to { transform: translateY(-200px); }
     }
 
-    .modal.show { opacity: 1; pointer-events: auto; }
-    .modal.show img { transform: scale(1); }
-
-    /* FOOTER COPYRIGHT */
-    .footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 13px;
-      opacity: 0.7;
-    }
-
-    body.dark .footer {
-      opacity: 0.8;
-    }
   </style>
 </head>
 
 <body>
-  <canvas id="sunsetParticles"></canvas>
 
-  <div class="navbar">
+  <nav class="navbar">
     <div class="logo">Anita Afani Deby</div>
-    <div class="nav-links">
-      <a href="#biodata">Biodata</a>
-      <a href="#funfact">Fun Fact</a>
-      <a href="https://maps.app.goo.gl/9JwKGxxpJJMaE53MA" target="_blank">Lokasi</a>
-      <button class="toggle" onclick="toggleDark()">🌙</button>
-    </div>
-  </div>
+    <ul class="menu">
+      <li><a href="#biodata">Biodata</a></li>
+      <li><a href="#funfact">Fun Fact</a></li>
+      <li><a href="https://maps.app.goo.gl/9JwKGxxpJJMaE53MA" target="_blank">Location</a></li>
+      <li><button class="toggle" onclick="toggleDark()">☀️🌙</button></li>
+    </ul>
+  </nav>
 
-  <div class="container">
-    <div class="card" id="biodata">
-      <div class="header">
-        <div class="profile" onclick="openModal()">
-          <img src="foto.jpeg" alt="Foto Profil" />
+  <main class="container">
+    <section class="card" id="biodata">
+
+      <div class="profile-layout">
+
+        <!-- LEFT -->
+        <div class="left-profile">
+          <div class="identity-text">
+            <h1>Anita Afani Deby</h1>
+            <p>Email: anitaafny@gmail.com</p>
+            <p>Telepon: +6222 8801 xxxx</p>
+            <p>Universitas Internasional Batam</p>
+          </div>
+
+          <div class="profile-photo" onclick="openModal()">
+            <img src="foto.jpeg" alt="Foto Profil" />
+          </div>
         </div>
 
-        <div>
-          <div class="name">Anita Afani Deby</div>
-          <div>Email: anitaafny@gmail.com</div>
-          <div>Telepon: +6222 8801 xxxx</div>
-          <div>Universitas Internasional Batam</div>
+        <!-- RIGHT -->
+        <div class="biodata-right">
+          <div class="biodata-title">BIODATA DIRI</div>
+
+          <table>
+            <tr><th>Nama</th><td>Anita Afani Deby</td></tr>
+            <tr><th>Tempat, Tanggal Lahir</th><td>Batam, 07 September 2006</td></tr>
+            <tr><th>Jenis Kelamin</th><td>Perempuan</td></tr>
+            <tr><th>Agama</th><td>Islam</td></tr>
+            <tr><th>Berat Badan</th><td>60 kg</td></tr>
+            <tr><th>Tinggi Badan</th><td>160 cm</td></tr>
+            <tr><th>Zodiak</th><td>Virgo</td></tr>
+            <tr><th>Hobi</th><td>Membaca novel dan bermain game</td></tr>
+            <tr><th>Makanan Kesukaan</th><td>Mie Kwetiau, Tarempa, dan Nasi Goreng</td></tr>
+            <tr><th>Minuman Kesukaan</th><td>Matcha Latte</td></tr>
+          </table>
         </div>
+
       </div>
 
-      <div class="section-title">Biodata</div>
-      <table>
-        <tr><th>Nama</th><td>Anita Afani Deby</td></tr>
-        <tr><th>Tempat, Tanggal Lahir</th><td>Batam, 07 September 2006</td></tr>
-        <tr><th>Jenis Kelamin</th><td>Perempuan</td></tr>
-        <tr><th>Agama</th><td>Islam</td></tr>
-        <tr><th>Berat Badan</th><td>60 kg</td></tr>
-        <tr><th>Tinggi Badan</th><td>160 cm</td></tr>
-        <tr><th>Zodiak</th><td>Virgo</td></tr>
-        <tr><th>Hobi</th><td>Membaca novel dan bermain game</td></tr>
-        <tr><th>Makanan Kesukaan</th><td>Mie Kwetiau, Tarempa, dan Nasi Goreng</td></tr>
-        <tr><th>Minuman Kesukaan</th><td>Matcha Latte</td></tr>
-      </table>
+      <!-- FUNFACT SECTION -->
+      <section id="funfact">
+        <h2 class="section-title">Fun Fact & My Favorite Song</h2>
 
-      <div class="section-title" id="funfact">Fun Fact & My Favorite Song</div>
-
-      <div class="funfact-box" onclick="toggleFunfact()">
-        Klik untuk melihat fun fact ✨
-        <div id="funfactContent" class="hidden">
-          Suka makan apa saja kecuali batu, kayu, daun dan seafood
+        <div class="funfact" onclick="toggleFunfact()">
+          Klik untuk melihat fun fact ✨
+          <p id="funfactContent" class="hidden">Suka makan apa saja kecuali batu, kayu, daun, dan seafood.</p>
         </div>
-      </div>
 
-      <div class="song-card" onclick="window.open('https://open.spotify.com/track/3ajByMLqAS1ywY98REuvVc')">🎵 Favorite Song 1</div>
-      <div class="song-card" onclick="window.open('https://open.spotify.com/track/1769byiABriA7jefBQIVnd')">🎵 Favorite Song 2</div>
-    </div>
-  </div>
+        <div class="songs">
+          <button class="song-btn" onclick="window.open('https://open.spotify.com/track/3ajByMLqAS1ywY98REuvVc?si=7ae6051bb9d548d8')">🎵 Song 1</button>
+          <button class="song-btn" onclick="window.open('https://open.spotify.com/track/1769byiABriA7jefBQIVnd?si=8b372a2d0d4f437b')">🎵 Song 2</button>
+        </div>
+      </section>
 
-  <!-- COPYRIGHT FOOTER -->
-  <footer class="footer">
-    © <span id="year"></span> Anita Afani Deby. All Rights Reserved.
+    </section>
+
+      
+
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Anita Afani Deby
   </footer>
 
-  <div class="modal" id="photoModal" onclick="closeModal()">
-    <img src="foto.jpeg" alt="Preview Foto" />
-  </div>
+  <dialog id="photoModal">
+    <img src="foto.jpeg" alt="Preview" style="width:320px;border-radius:16px;">
+  </dialog>
 
   <script>
     function toggleFunfact() {
       document.getElementById('funfactContent').classList.toggle('hidden');
     }
 
-    function openModal() {
-      document.getElementById('photoModal').classList.add('show');
-    }
-
-    function closeModal() {
-      document.getElementById('photoModal').classList.remove('show');
-    }
-
     function toggleDark() {
       document.body.classList.toggle('dark');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
     }
 
-    // AUTO COPYRIGHT YEAR
+    function openModal() {
+      document.getElementById('photoModal').showModal();
+    }
+
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    const canvas = document.getElementById('sunsetParticles');
-    const ctx = canvas.getContext('2d');
+    const hour = new Date().getHours();
+    const savedTheme = localStorage.getItem('theme');
 
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    if (savedTheme) {
+      if (savedTheme === 'dark') document.body.classList.add('dark');
+    } else {
+      if (hour >= 18 || hour <= 5) document.body.classList.add('dark');
     }
-    window.addEventListener('resize', resize);
-    resize();
-
-    const particles = Array.from({ length: 50 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 2 + 1,
-      speed: Math.random() * 0.3 + 0.1,
-      o: Math.random()
-    }));
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = document.body.classList.contains('dark')
-          ? `rgba(255,230,255,${p.o})`
-          : `rgba(233,213,183,${p.o})`;
-        ctx.fill();
-
-        p.y -= p.speed;
-        if (p.y < 0) p.y = canvas.height;
-      });
-
-      requestAnimationFrame(draw);
-    }
-
-    draw();
   </script>
+
 </body>
 </html>
+
